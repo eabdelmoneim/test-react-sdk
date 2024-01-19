@@ -1,4 +1,4 @@
-import { ConnectWallet, NFTContract, Web3Button, useAddress, useBurnNFT, useContract } from "@thirdweb-dev/react";
+import { ConnectWallet, Web3Button, useAddress, useBurnNFT, useContract } from "@thirdweb-dev/react";
 import "./styles/Home.css";
 
 export default function Home() {
