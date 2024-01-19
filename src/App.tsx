@@ -3,14 +3,14 @@ import "./styles/Home.css";
 
 export default function Home() {
 
-  const nftContract = useContract("0x5b93F6274d5FDaE856B4E804bF9a83Cd1095A43c");
+  const {contract} = useContract("0x5b93F6274d5FDaE856B4E804bF9a83Cd1095A43c");
   const address = useAddress();
   
   const {
     mutate: burnNft,
     isLoading,
     error,
-  } = useBurnNFT(nftContract.contract);
+  } = useBurnNFT(contract);
 
   if (error) {
     console.error("failed to burn NFT", error);
@@ -48,7 +48,7 @@ export default function Home() {
           ) : (
          <>  
     <Web3Button
-      contractAddress="0x5b93F6274d5FDaE856B4E804bF9a83Cd1095A43c"
+      contractAddress={contract?.getAddress() as string}
       action={() =>
         burnNft({
           tokenId: "1",
