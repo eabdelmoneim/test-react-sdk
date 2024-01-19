@@ -1,7 +1,21 @@
-import { ConnectWallet } from "@thirdweb-dev/react";
+import { ConnectWallet, NFTContract, Web3Button, useAddress, useBurnNFT, useContract } from "@thirdweb-dev/react";
 import "./styles/Home.css";
 
 export default function Home() {
+
+  const nftContract = useContract("0x5b93F6274d5FDaE856B4E804bF9a83Cd1095A43c");
+  const address = useAddress();
+  
+  const {
+    mutate: burnNft,
+    isLoading,
+    error,
+  } = useBurnNFT(nftContract.contract);
+
+  if (error) {
+    console.error("failed to burn NFT", error);
+  }
+
   return (
     <main className="main">
       <div className="container">
@@ -19,12 +33,8 @@ export default function Home() {
             </span>
           </h1>
 
-          <p className="description">
-            Get started by configuring your desired network in{" "}
-            <code className="code">src/index.js</code>, then modify the{" "}
-            <code className="code">src/App.js</code> file!
-          </p>
-
+          {!address?  (
+            <>
           <div className="connect">
             <ConnectWallet
               dropdownPosition={{
@@ -32,66 +42,24 @@ export default function Home() {
                 align: "center",
               }}
             />
+            
           </div>
-        </div>
-
-        <div className="grid">
-          <a
-            href="https://portal.thirdweb.com/"
-            className="card"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="/images/portal-preview.png"
-              alt="Placeholder preview of starter"
-            />
-            <div className="card-text">
-              <h2 className="gradient-text-1">Portal ➜</h2>
-              <p>
-                Guides, references, and resources that will help you build with
-                thirdweb.
-              </p>
-            </div>
-          </a>
-
-          <a
-            href="https://thirdweb.com/dashboard"
-            className="card"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="/images/dashboard-preview.png"
-              alt="Placeholder preview of starter"
-            />
-            <div className="card-text">
-              <h2 className="gradient-text-2">Dashboard ➜</h2>
-              <p>
-                Deploy, configure, and manage your smart contracts from the
-                dashboard.
-              </p>
-            </div>
-          </a>
-
-          <a
-            href="https://thirdweb.com/templates"
-            className="card"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="/images/templates-preview.png"
-              alt="Placeholder preview of templates"
-            />
-            <div className="card-text">
-              <h2 className="gradient-text-3">Templates ➜</h2>
-              <p>
-                Discover and clone template projects showcasing thirdweb
-                features.
-              </p>
-            </div>
-          </a>
+          </>
+          ) : (
+         <>  
+    <Web3Button
+      contractAddress="0x5b93F6274d5FDaE856B4E804bF9a83Cd1095A43c"
+      action={() =>
+        burnNft({
+          tokenId: "1",
+          amount: "1",
+        })
+      }
+    >
+      Burn NFT
+    </Web3Button>
+    </>
+          )}
         </div>
       </div>
     </main>

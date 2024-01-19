@@ -2,21 +2,24 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { ThirdwebProvider } from "@thirdweb-dev/react";
+import { ThirdwebProvider, embeddedWallet } from "@thirdweb-dev/react";
+import { ArbitrumGoerli } from "@thirdweb-dev/chains";
+
 import "./styles/globals.css";
 
 // This is the chain your dApp will work on.
 // Change this to the chain your app is built for.
 // You can also import additional chains from `@thirdweb-dev/chains` and pass them directly.
-const activeChain = "ethereum";
+
 
 const container = document.getElementById("root");
 const root = createRoot(container!);
 root.render(
   <React.StrictMode>
     <ThirdwebProvider
-      activeChain={activeChain}
+      activeChain={ArbitrumGoerli}
       clientId={process.env.REACT_APP_TEMPLATE_CLIENT_ID}
+      supportedWallets={[embeddedWallet()]}
     >
       <App />
     </ThirdwebProvider>
