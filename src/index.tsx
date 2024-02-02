@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ThirdwebProvider, embeddedWallet } from "@thirdweb-dev/react";
-import { ArbitrumGoerli } from "@thirdweb-dev/chains";
+import {  Flag } from "@thirdweb-dev/chains";
 
 import "./styles/globals.css";
 
@@ -17,7 +17,7 @@ const root = createRoot(container!);
 root.render(
   <React.StrictMode>
     <ThirdwebProvider
-      activeChain={ArbitrumGoerli}
+      activeChain={Flag}
       clientId={process.env.REACT_APP_TEMPLATE_CLIENT_ID}
       supportedWallets={[embeddedWallet()]}
     >

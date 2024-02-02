@@ -3,18 +3,18 @@ import "./styles/Home.css";
 
 export default function Home() {
 
-  const {contract} = useContract("0x5b93F6274d5FDaE856B4E804bF9a83Cd1095A43c");
-  const address = useAddress();
+ // const {contract} = useContract("0x5b93F6274d5FDaE856B4E804bF9a83Cd1095A43c");
+ const address = useAddress();
   
-  const {
-    mutate: burnNft,
-    isLoading,
-    error,
-  } = useBurnNFT(contract);
+  // const {
+  //   mutate: burnNft,
+  //   isLoading,
+  //   error,
+  // } = useBurnNFT(contract);
 
-  if (error) {
-    console.error("failed to burn NFT", error);
-  }
+  // if (error) {
+  //   console.error("failed to burn NFT", error);
+  // }
 
   return (
     <main className="main">
@@ -37,17 +37,15 @@ export default function Home() {
             <>
           <div className="connect">
             <ConnectWallet
-              dropdownPosition={{
-                side: "bottom",
-                align: "center",
-              }}
             />
             
           </div>
           </>
           ) : (
          <>  
-    <Web3Button
+         <ConnectWallet
+            />
+    {/* <Web3Button
       contractAddress={contract?.getAddress() as string}
       action={() =>
         burnNft({
@@ -57,7 +55,7 @@ export default function Home() {
       }
     >
       Burn NFT
-    </Web3Button>
+    </Web3Button> */}
     </>
           )}
         </div>
